@@ -1,14 +1,16 @@
 import os
+import sys
 import time
 from slackclient import SlackClient
 import datetime
 from duck import findImage
+from bot_id import getBotId
 
-API_key=""
+API_key=sys.argv[1]
+BOT_NAME=sys.argv[2]
+
 slack_client = SlackClient(API_key)
-# you can get the bot_id by using print_bot_id
-BOT_ID = ""
-
+BOT_ID = getBotId(API_key,BOT_NAME)
 
 # constants
 AT_BOT = "<@" + BOT_ID + ">:"
@@ -75,18 +77,6 @@ def parse_slack_output(slack_rtm_output):
                        output['channel']
     return None, None
 
-
-if __name__ == "__main__":
-    READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
-    if slack_client.rtm_connect():
-        print("StarterBot connected and running!")
-        while True:
-            command, channel = parse_slack_output(slack_client.rtm_read())
-            if command and channel:
-                handle_command(command, channel)
-            time.sleep(READ_WEBSOCKET_DELAY)
-    else:
-        print("Connection failed. Invalid Slack token or bot ID?")
 
 if __name__ == "__main__":
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
