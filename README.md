@@ -8,7 +8,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 Get your slack API_key and create a new bot. Run bot.py with api_key and name of bot as arguments.
-```python bot.py apikey slackbotname
+```
+python bot.py apikey slackbotname
 ```
 
 You should see:
