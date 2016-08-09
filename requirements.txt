@@ -1,4 +1,7 @@
+duckduckgo==0.1
+poster==0.8.1
 requests==2.10.0
 six==1.10.0
 slackclient==1.0.1
+Unirest==1.1.7
 websocket-client==0.37.0

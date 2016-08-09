@@ -1,13 +1,12 @@
 import os
-import sys
 import time
 from slackclient import SlackClient
 import datetime
 from duck import findImage
 from bot_id import getBotId
 
-API_key=sys.argv[1]
-BOT_NAME=sys.argv[2]
+API_key="xoxb-66232488370-noJGmKqBGH1w5wX1pIcMrjER"
+BOT_NAME="cocobot"
 
 slack_client = SlackClient(API_key)
 BOT_ID = getBotId(API_key,BOT_NAME)
@@ -45,15 +44,24 @@ def handle_command(command, channel):
     # returns an image link
     elif command.startswith('find'):
         search_for=command.split('find')[1].strip()
-        response=str(findImage(search_for))
+        try:
+            response=str(findImage(search_for))
+        except:
+            response="error :("
 
     elif command.startswith('calculate'):
         evaluate=command.split('calculate')[1].strip()
-        x=eval(evaluate)
-        response=str(x)
+        try:
+            x=eval(evaluate)
+            response=str(x)
+        except:
+            response="meh"
 
     else:
-        response=str(findImage(command.strip()))
+        try:
+            response=str(findImage(command.strip()))
+        except:
+            response="bananas"
 
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
